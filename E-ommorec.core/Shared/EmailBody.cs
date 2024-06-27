@@ -65,16 +65,24 @@ namespace E_ommorec.core.Shared
     }}
   </style>
 </head>
-<body>
+<body style=""border:1px solid #fff ;"">
   <div class=""button-container"">
     <h1>{mesg}</h1>
 
     <hr>
-You are receiving this e-mail because you requested a {mesg} for your E-commerc App.
+
+We heard that you lost your ""Name"" password. Sorry about that!
+
+But don’t worry! You can use the following button to reset your password
     <br/>
     <a class=""button"" href=""https://localhost:4200/{component}?email={email}&code={encodedEmailToken}"">
      {mesg}
     </a>
+<br/>
+<p>If you don’t use this link within 3 hours, it will expire. To get a new {mesg} link, visit: https://localhost/{component}
+
+Thanks,
+The GitHub Team</p>
   </div>
 </body>
 </html>

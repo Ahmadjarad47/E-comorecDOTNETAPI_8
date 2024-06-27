@@ -25,6 +25,7 @@ namespace E_commorec.infrastructuer
         public static IServiceCollection infrastructuer(this IServiceCollection services, IConfiguration configure)
         {
 
+
             services.AddDbContext<AppDbContext>(op =>
             {
                 op.UseSqlServer(configure.GetConnectionString("URL_Connection"));
@@ -53,7 +54,11 @@ namespace E_commorec.infrastructuer
             }).AddRoleManager<RoleManager<IdentityRole>>()
               .AddEntityFrameworkStores<AppDbContext>()
               .AddDefaultTokenProviders();
+            services.Configure<DataProtectionTokenProviderOptions>(options =>
+            {
+                options.TokenLifespan = TimeSpan.FromHours(3);
 
+            });
 
 
             services.AddScoped<IEmailService, EmailService>();
