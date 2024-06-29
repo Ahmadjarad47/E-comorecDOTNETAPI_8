@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_ommorec.core.DTO
+namespace E_commorec.core.DTO
 {
     public class ChangeRoleFromAdmin
     {
-       
+
         [Required]
         public string EmailOrUserName { get; set; }
         [Required]

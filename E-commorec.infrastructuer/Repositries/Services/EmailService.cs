@@ -1,14 +1,9 @@
 ﻿
-using E_ommorec.core.Entity;
-using E_ommorec.core.Services;
+
+using E_commorec.core.Entity;
+using E_commorec.core.Services;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace E_commorec.infrastructuer.Repositries.Services
 {
@@ -41,7 +36,7 @@ namespace E_commorec.infrastructuer.Repositries.Services
 
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                     throw;

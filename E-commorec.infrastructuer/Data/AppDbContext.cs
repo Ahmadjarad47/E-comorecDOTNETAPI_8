@@ -1,4 +1,4 @@
-﻿using E_ommorec.core.Entity;
+﻿using E_commorec.core.Entity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

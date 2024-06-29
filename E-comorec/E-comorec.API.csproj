@@ -14,12 +14,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\E-commorec.infrastructuer\E-commorec.infrastructuer.csproj" />
-    <ProjectReference Include="..\E-ommorec.core\E-commorec.core.csproj" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <ProjectReference Include="..\E-commorec.infrastructuer\E-commorec.infrastructuer.csproj" />
+    <ProjectReference Include="..\E-ommorec.core\E-commorec.core.csproj" />
   </ItemGroup>
 
 </Project>

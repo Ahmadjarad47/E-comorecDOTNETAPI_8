@@ -1,9 +1,9 @@
 ﻿using E_comorec.API.Helper;
-using E_ommorec.core.DTO;
-using E_ommorec.core.InterFace;
-using E_ommorec.core.InterFace.User;
-using E_ommorec.core.Services;
-using E_ommorec.core.Shared;
+using E_commorec.core.DTO;
+using E_commorec.core.InterFace;
+using E_commorec.core.InterFace.User;
+using E_commorec.core.Services;
+using E_commorec.core.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

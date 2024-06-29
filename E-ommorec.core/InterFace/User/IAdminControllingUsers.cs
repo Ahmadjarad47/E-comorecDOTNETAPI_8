@@ -1,12 +1,12 @@
-﻿using E_ommorec.core.DTO;
-using E_ommorec.core.Entity;
+﻿using E_commorec.core.DTO;
+using E_commorec.core.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_ommorec.core.InterFace.User
+namespace E_commorec.core.InterFace.User
 {
     public interface IAdminControllingUsers
     {

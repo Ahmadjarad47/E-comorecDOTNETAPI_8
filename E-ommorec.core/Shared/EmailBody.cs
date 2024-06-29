@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace E_ommorec.core.Shared
+namespace E_commorec.core.Shared
 {
     public class EmailBody
     {

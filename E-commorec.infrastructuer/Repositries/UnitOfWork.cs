@@ -1,9 +1,9 @@
 ﻿using E_commorec.infrastructuer.Data;
 using E_commorec.infrastructuer.Repositries.Users;
-using E_ommorec.core.Entity;
-using E_ommorec.core.InterFace;
-using E_ommorec.core.InterFace.User;
-using E_ommorec.core.Services;
+using E_commorec.core.Entity;
+using E_commorec.core.InterFace;
+using E_commorec.core.InterFace.User;
+using E_commorec.core.Services;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;

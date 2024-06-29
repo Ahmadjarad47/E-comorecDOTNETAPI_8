@@ -4,7 +4,7 @@ using E_commorec.infrastructuer.Data.SeedRoleAndAdmin;
 using E_commorec.infrastructuer.Repositries;
 using E_comorec.API.Helper;
 using E_comorec.API.Middlwaer;
-using E_ommorec.core.InterFace;
+using E_commorec.core.InterFace;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_comorec.API

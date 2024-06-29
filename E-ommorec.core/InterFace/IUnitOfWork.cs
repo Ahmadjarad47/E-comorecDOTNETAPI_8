@@ -1,11 +1,11 @@
-﻿using E_ommorec.core.InterFace.User;
+﻿using E_commorec.core.InterFace.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_ommorec.core.InterFace
+namespace E_commorec.core.InterFace
 {
     public interface IUnitOfWork
     {

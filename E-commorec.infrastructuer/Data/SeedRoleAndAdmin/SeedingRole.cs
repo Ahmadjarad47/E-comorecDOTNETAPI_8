@@ -1,5 +1,5 @@
-﻿using E_ommorec.core.Entity;
-using E_ommorec.core.Shared;
+﻿using E_commorec.core.Entity;
+using E_commorec.core.Shared;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;

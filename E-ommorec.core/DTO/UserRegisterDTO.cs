@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_ommorec.core.DTO
+namespace E_commorec.core.DTO
 {
     public record UserRegisterDTO([Required] string UserName, [EmailAddress] string Email, [Required] string password);
 

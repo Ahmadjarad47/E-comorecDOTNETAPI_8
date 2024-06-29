@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_ommorec.core.Entity
+namespace E_commorec.core.Entity
 {
     public class AppUsers : IdentityUser
     {

@@ -3,19 +3,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using E_commorec.infrastructuer.Data;
-using E_ommorec.core.Services;
 using E_commorec.infrastructuer.Repositries.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-
-using E_ommorec.core.InterFace;
 using E_commorec.infrastructuer.Repositries;
-using E_ommorec.core.Entity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.FileProviders;
+using E_commorec.core.Services;
+using E_commorec.core.InterFace;
+using E_commorec.core.Entity;
 
 
 namespace E_commorec.infrastructuer
@@ -100,7 +99,7 @@ namespace E_commorec.infrastructuer
 
             services.AddSwaggerGen(op =>
             {
-                OpenApiSecurityScheme? securty = new OpenApiSecurityScheme
+                OpenApiSecurityScheme securty = new OpenApiSecurityScheme
                 {
                     Name = "Authorization",
                     Description = "jwt Auth Bearer",

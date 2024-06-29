@@ -1,6 +1,6 @@
 ﻿using E_commorec.infrastructuer.Data;
-using E_ommorec.core.Entity;
-using E_ommorec.core.InterFace;
+using E_commorec.core.Entity;
+using E_commorec.core.InterFace;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using System;
