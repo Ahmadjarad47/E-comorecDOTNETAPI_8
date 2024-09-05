@@ -28,10 +28,10 @@ namespace E_commorec.infrastructuer
             services.AddDbContext<AppDbContext>(op =>
             {
                 op.UseSqlServer(configure.GetConnectionString("URL_Connection"));
-                op.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+
             }, ServiceLifetime.Transient);
 
-
+            services.AddHostedService<changeImages>();
             services.AddScoped(typeof(IGenericRepositry<>), typeof(GenericRepositries<>));
 
             services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));

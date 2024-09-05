@@ -22,7 +22,7 @@ namespace E_commorec.infrastructuer.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("E_ommorec.core.Entity.AppUsers", b =>
+            modelBuilder.Entity("E_commorec.core.Entity.AppUsers", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -43,6 +43,9 @@ namespace E_commorec.infrastructuer.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime>("FirstTimeAddStudent")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -66,9 +69,6 @@ namespace E_commorec.infrastructuer.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("RefreshToken")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
@@ -94,6 +94,275 @@ namespace E_commorec.infrastructuer.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("E_commorec.core.Entity.Certificate", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("SubCourseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("SubCourseId");
+
+                    b.ToTable("Certificates");
+                });
+
+            modelBuilder.Entity("E_commorec.core.Entity.Course", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("E_commorec.core.Entity.Student", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FirstTimeRegister")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(35)
+                        .HasColumnType("nvarchar(35)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Study")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypeCourse")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Students");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("4eccb1ee-0f39-4961-95ae-773cf9bf1334"),
+                            Email = "test1@gmail.com",
+                            FirstTimeRegister = new DateTime(2024, 9, 5, 8, 24, 41, 318, DateTimeKind.Local).AddTicks(8866),
+                            Gender = 0,
+                            Name = "sadwa",
+                            Phone = "098",
+                            Study = "",
+                            TypeCourse = "[\"test\"]"
+                        },
+                        new
+                        {
+                            Id = new Guid("ac6fb026-09cf-4a85-80ae-df92c897a7a2"),
+                            Email = "test31@gmail.com",
+                            FirstTimeRegister = new DateTime(2024, 9, 5, 8, 24, 41, 319, DateTimeKind.Local).AddTicks(130),
+                            Gender = 0,
+                            Name = "asdgf",
+                            Phone = "123123",
+                            Study = "",
+                            TypeCourse = "[\"utyy\"]"
+                        },
+                        new
+                        {
+                            Id = new Guid("303ec6d6-d58f-452e-82a3-3ea8d46def82"),
+                            Email = "test2@gmail.com",
+                            FirstTimeRegister = new DateTime(2024, 9, 5, 8, 24, 41, 319, DateTimeKind.Local).AddTicks(153),
+                            Gender = 0,
+                            Name = ",bvbnbn",
+                            Phone = "098",
+                            Study = "",
+                            TypeCourse = "[\"teghjst\"]"
+                        });
+                });
+
+            modelBuilder.Entity("E_commorec.core.Entity.StudentSubCourse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("SubCourseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("SubCourseId");
+
+                    b.ToTable("StudentSubCourses");
+                });
+
+            modelBuilder.Entity("E_commorec.core.Entity.SubCourse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Day")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Hourscompleted")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("TeacherId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("TimeHouerFromTo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TimeOfLectuer")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalHour")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("Subcourses");
+                });
+
+            modelBuilder.Entity("E_commorec.core.Entity.Teacher", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FirstTimeRegister")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LevelOfStudy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Position")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeToResign")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Teachers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("5669627e-5482-45ba-b216-88d8958737e5"),
+                            Email = "test1@gmail.com",
+                            FirstTimeRegister = new DateTime(2024, 9, 5, 8, 24, 41, 320, DateTimeKind.Local).AddTicks(1287),
+                            Gender = 0,
+                            LevelOfStudy = "string",
+                            Name = "sadwa",
+                            Phone = "098",
+                            Position = "stro",
+                            TimeToResign = new DateTime(2024, 9, 5, 8, 24, 41, 320, DateTimeKind.Local).AddTicks(2428)
+                        },
+                        new
+                        {
+                            Id = new Guid("3b1dd27d-d6da-44d9-9d5e-65f14ea639b8"),
+                            Email = "test2@gmail.com",
+                            FirstTimeRegister = new DateTime(2024, 9, 5, 8, 24, 41, 320, DateTimeKind.Local).AddTicks(2666),
+                            Gender = 0,
+                            LevelOfStudy = "str2ing",
+                            Name = "s1adwa",
+                            Phone = "0981",
+                            Position = "s3tro",
+                            TimeToResign = new DateTime(2024, 9, 5, 8, 24, 41, 320, DateTimeKind.Local).AddTicks(2669)
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -229,6 +498,63 @@ namespace E_commorec.infrastructuer.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("E_commorec.core.Entity.Certificate", b =>
+                {
+                    b.HasOne("E_commorec.core.Entity.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("E_commorec.core.Entity.SubCourse", "SubCourse")
+                        .WithMany()
+                        .HasForeignKey("SubCourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+
+                    b.Navigation("SubCourse");
+                });
+
+            modelBuilder.Entity("E_commorec.core.Entity.StudentSubCourse", b =>
+                {
+                    b.HasOne("E_commorec.core.Entity.Student", "Student")
+                        .WithMany("StudentSubCourses")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("E_commorec.core.Entity.SubCourse", "SubCourse")
+                        .WithMany("StudentSubCourses")
+                        .HasForeignKey("SubCourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+
+                    b.Navigation("SubCourse");
+                });
+
+            modelBuilder.Entity("E_commorec.core.Entity.SubCourse", b =>
+                {
+                    b.HasOne("E_commorec.core.Entity.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("E_commorec.core.Entity.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Teacher");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -240,7 +566,7 @@ namespace E_commorec.infrastructuer.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("E_ommorec.core.Entity.AppUsers", null)
+                    b.HasOne("E_commorec.core.Entity.AppUsers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -249,7 +575,7 @@ namespace E_commorec.infrastructuer.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("E_ommorec.core.Entity.AppUsers", null)
+                    b.HasOne("E_commorec.core.Entity.AppUsers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -264,7 +590,7 @@ namespace E_commorec.infrastructuer.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("E_ommorec.core.Entity.AppUsers", null)
+                    b.HasOne("E_commorec.core.Entity.AppUsers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -273,11 +599,21 @@ namespace E_commorec.infrastructuer.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("E_ommorec.core.Entity.AppUsers", null)
+                    b.HasOne("E_commorec.core.Entity.AppUsers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("E_commorec.core.Entity.Student", b =>
+                {
+                    b.Navigation("StudentSubCourses");
+                });
+
+            modelBuilder.Entity("E_commorec.core.Entity.SubCourse", b =>
+                {
+                    b.Navigation("StudentSubCourses");
                 });
 #pragma warning restore 612, 618
         }

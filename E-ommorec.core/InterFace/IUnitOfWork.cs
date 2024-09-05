@@ -11,5 +11,10 @@ namespace E_commorec.core.InterFace
     {
         public IUsers users { get; }
         public IAdminControllingUsers ControllingUsers { get; }
+
+        public IStudent Student { get; }
+        public ITeacher Teacher { get; }
+        public ICourse Course { get; }
+        public ISubCourse SubCourse { get; }
     }
 }

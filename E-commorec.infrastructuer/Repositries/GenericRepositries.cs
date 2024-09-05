@@ -9,6 +9,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Caching.Memory;
+using System.Collections;
 
 namespace E_commorec.infrastructuer.Repositries
 {
@@ -16,10 +18,11 @@ namespace E_commorec.infrastructuer.Repositries
     {
         private readonly AppDbContext context;
         private readonly IFileProvider fileProvider;
-
-        public GenericRepositries(AppDbContext context)
+        private readonly IMemoryCache memoryCache;
+        public GenericRepositries(AppDbContext context, IMemoryCache memoryCache)
         {
             this.context = context;
+            this.memoryCache = memoryCache;
         }
 
         public GenericRepositries(AppDbContext context, IFileProvider fileProvider)
@@ -92,11 +95,43 @@ namespace E_commorec.infrastructuer.Repositries
         }
 
 
-        public async Task UpdateAsync(int id, T entity)
+        public async Task UpdateAsync(T entity)
         {
-            var entities = await context.Set<T>().FindAsync(id);
-            context.Update(entities);
+            context.Entry(entity).State = EntityState.Modified;
             await context.SaveChangesAsync();
         }
+
+        public async Task<T> GetByGUIDAsync(Guid id)
+        => await context.Set<T>().FindAsync(id);
+
+        public async Task DeleteByGuidAsync(Guid id)
+        {
+            var entities = await context.Set<T>().FindAsync(id);
+            context.Set<T>().Remove(entities);
+            await context.SaveChangesAsync();
+        }
+
+        public Task AddToMemoryCache(string KeyName, List<T> entity)
+        {
+            var entities = memoryCache.Set<List<T>>(KeyName, entity, DateTime.Now.AddHours(10));
+            return Task.CompletedTask;
+        }
+        public async Task<IReadOnlyList<T>> GetAllFromMemoryAsync(string keyName)
+        {
+            if (memoryCache.TryGetValue(keyName, out List<T> cachedList))
+            {
+                return cachedList.AsReadOnly();
+            }
+            return new List<T>().AsReadOnly();
+        }
+
+
+        public Task DeleteFromMemoryCache(string KeyName)
+        {
+            memoryCache.Remove(KeyName);
+            return Task.CompletedTask;
+        }
+
+
     }
 }

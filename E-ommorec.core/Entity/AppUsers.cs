@@ -9,8 +9,13 @@ namespace E_commorec.core.Entity
 {
     public class AppUsers : IdentityUser
     {
-        public string RefreshToken { get; set; }
+        public DateTime FirstTimeAddStudent { get; set; } = DateTime.Now;
+
         public bool ConfiermDeleteAccount { get; set; } = false;
         public string Role { get; set; }
+
+
+
+
     }
 }

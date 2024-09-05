@@ -5,19 +5,19 @@ using E_commorec.core.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using E_comorec.API.Controllers;
+using AutoMapper;
 
-namespace E_comorec.API.Controllers
+namespace Controllers.Admin
 {
-    [Route("api/[controller]")]
-    [ApiController]
+
     //[Authorize(Roles = "SupAdmin")]
-    public class AdminController : ControllerBase
+    public class AdminController : BaseController
     {
-        private readonly IUnitOfWork work;
-        public AdminController(IUnitOfWork work)
+        public AdminController(IUnitOfWork service, IMapper mapper) : base(service, mapper)
         {
-            this.work = work;
         }
+
         [HttpPost("change-user-role")]
         public async Task<ActionResult> change(ChangeRoleFromAdmin changeRole)
         {
@@ -26,7 +26,7 @@ namespace E_comorec.API.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    bool result = await work.ControllingUsers.ChangeRoleAsync(changeRole);
+                    bool result = await _service.ControllingUsers.ChangeRoleAsync(changeRole);
                     return result ? Ok(new BaseResponse(200, result.ToString())) : BadRequest(new BaseResponse(400, "something went wrong"));
                 }
             }
@@ -40,10 +40,10 @@ namespace E_comorec.API.Controllers
         }
         [HttpGet("Get-All-Users")]
         public async Task<IActionResult> get()
-         => Ok(await work.ControllingUsers.GetAllAsync());
+         => Ok(await _service.ControllingUsers.GetAllAsync());
         [HttpGet("Get-User-By-Id")]
         public async Task<IActionResult> getbyid(string id)
-        => Ok(await work.ControllingUsers.GetUserByIdAsync(id));
+        => Ok(await _service.ControllingUsers.GetUserByIdAsync(id));
         [HttpDelete("Delete-User")]
         public async Task<ActionResult> Delete(string id)
         {
@@ -51,7 +51,7 @@ namespace E_comorec.API.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    bool res = await work.ControllingUsers.DeleteUserAsync(id);
+                    bool res = await _service.ControllingUsers.DeleteUserAsync(id);
                     return Ok(new BaseResponse(200, res.ToString()));
                 }
 

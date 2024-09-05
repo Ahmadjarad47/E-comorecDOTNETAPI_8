@@ -8,23 +8,25 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
+using E_comorec.API.Controllers;
+using AutoMapper;
 
-namespace E_comorec.API.Controllers;
+namespace Controllers.Users;
 
-[Route("api/[controller]")]
-[ApiController]
-public class AccountController : ControllerBase
+
+public class AccountController : BaseController
 {
-    private readonly IUnitOfWork _service;
+    public AccountController(IUnitOfWork service, IMapper mapper) : base(service, mapper)
+    {
+    }
 
     /// <summary>
     /// Constructor to initialize dependencies.
     /// </summary>
     /// <param name="service">Unit of Work service.</param>
-    public AccountController(IUnitOfWork service)
-    {
-        _service = service;
-    }
+
+
 
     /// <summary>
     /// Registers a new user.
@@ -91,9 +93,9 @@ public class AccountController : ControllerBase
                 {
                     HttpOnly = true,
                     Secure = true,
-                    SameSite = SameSiteMode.None,
+                    SameSite = SameSiteMode.Strict,
                     IsEssential = true,
-                    //  Domain = "https://localhost/4200",
+                    Domain = "https://localhost/4200",
                     Expires = DateTime.Now.AddHours(30),
 
                 });
@@ -106,6 +108,25 @@ public class AccountController : ControllerBase
         }
         return BadRequest(new BaseResponse(400));
     }
+
+
+    [HttpPost("Logout")]
+    public Task logout()
+    {
+
+        Response.Cookies.Append("token", " ", new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.Strict,
+            IsEssential = true,
+            Domain = "https://localhost/4200",
+            Expires = DateTime.Now.AddSeconds(-1),
+        });
+        return Task.CompletedTask;
+
+    }
+
 
 
 
@@ -138,7 +159,7 @@ public class AccountController : ControllerBase
     /// <param name="Email">User email address.</param>
     /// <returns>Action result indicating success or failure.</returns>
     [HttpPost("Reset-Password")]
-    public async Task<ActionResult> ForgetPasswordResetIt(ForgetPasswordDTO forget)
+    public async Task<ActionResult> ForgetPasswordResetIt([FromBody] ForgetPasswordDTO forget)
     {
         int result = 10;
         try

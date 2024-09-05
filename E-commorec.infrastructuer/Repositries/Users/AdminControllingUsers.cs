@@ -68,7 +68,7 @@ namespace E_commorec.infrastructuer.Repositries.Users
 
         public async Task<IReadOnlyList<GetAllUsersDTO>> GetAllAsync()
         {
-            List<GetAllUsersDTO> users = await context.AppUsers.Select(m => new GetAllUsersDTO
+            var users = context.AppUsers.Select(m => new GetAllUsersDTO
             {
                 UserName = m.UserName,
                 Email = m.Email,
@@ -77,8 +77,8 @@ namespace E_commorec.infrastructuer.Repositries.Users
                 ,
                 Role = m.Role
 
-            }).ToListAsync();
-            return users;
+            }).AsNoTracking();
+            return await users.ToListAsync();
         }
 
         public async Task<GetAllUsersDTO> GetUserByIdAsync(string id)
@@ -92,7 +92,7 @@ namespace E_commorec.infrastructuer.Repositries.Users
                 Role = x.Role
               ,
                 UserName = x.UserName
-            }).FirstOrDefaultAsync();
+            }).AsNoTracking().FirstOrDefaultAsync();
             return user;
         }
     }
