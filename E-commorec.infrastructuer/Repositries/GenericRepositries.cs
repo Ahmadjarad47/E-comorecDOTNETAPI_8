@@ -1,16 +1,9 @@
-﻿using E_commorec.infrastructuer.Data;
-using E_commorec.core.Entity;
-using E_commorec.core.InterFace;
+﻿using E_commorec.core.InterFace;
+using E_commorec.infrastructuer.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
-using System.Collections;
+using Microsoft.Extensions.FileProviders;
+using System.Linq.Expressions;
 
 namespace E_commorec.infrastructuer.Repositries
 {

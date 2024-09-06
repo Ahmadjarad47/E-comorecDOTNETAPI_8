@@ -1,11 +1,4 @@
-﻿using E_commorec.core.DTO.Course;
-using E_commorec.core.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
 namespace E_commorec.core.InterFace
 {

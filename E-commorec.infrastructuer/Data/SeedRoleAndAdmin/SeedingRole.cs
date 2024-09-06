@@ -2,11 +2,6 @@
 using E_commorec.core.Shared;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace E_commorec.infrastructuer.Data.SeedRoleAndAdmin
 {

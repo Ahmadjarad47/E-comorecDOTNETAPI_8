@@ -1,18 +1,15 @@
-﻿using E_comorec.API.Helper;
+﻿using AutoMapper;
 using E_commorec.core.DTO;
 using E_commorec.core.InterFace;
-using E_commorec.core.Shared;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+using E_comorec.API.Controllers.Admin;
+using E_comorec.API.Helper;
 using Microsoft.AspNetCore.Mvc;
-using E_comorec.API.Controllers;
-using AutoMapper;
 
 namespace Controllers.Admin
 {
 
     //[Authorize(Roles = "SupAdmin")]
-    public class AdminController : BaseController
+    public class AdminController : BaseAdminController
     {
         public AdminController(IUnitOfWork service, IMapper mapper) : base(service, mapper)
         {

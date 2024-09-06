@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using E_commorec.core.DTO.Course;
 using E_commorec.core.InterFace;
+using E_comorec.API.Controllers.Admin;
 using E_comorec.API.Helper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace E_comorec.API.Controllers.Users
+namespace Controllers.Admin
 {
 
-    public class SubCoursesController : BaseController
+    public class SubCoursesController : BaseAdminController
     {
         public SubCoursesController(IUnitOfWork service, IMapper mapper) : base(service, mapper)
         {

@@ -1,17 +1,11 @@
-﻿using E_commorec.infrastructuer.Data;
-using E_commorec.core.DTO;
+﻿using E_commorec.core.DTO;
 using E_commorec.core.Entity;
 using E_commorec.core.InterFace.User;
 using E_commorec.core.Shared;
+using E_commorec.infrastructuer.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace E_commorec.infrastructuer.Repositries.Users
 {

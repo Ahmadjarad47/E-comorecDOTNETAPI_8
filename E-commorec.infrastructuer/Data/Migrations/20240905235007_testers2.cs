@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -8,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace E_commorec.infrastructuer.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class testers2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -67,6 +66,23 @@ namespace E_commorec.infrastructuer.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Courses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Notes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmailForWho = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -307,9 +323,9 @@ namespace E_commorec.infrastructuer.Data.Migrations
                 columns: new[] { "Id", "Email", "FirstTimeRegister", "Gender", "Image", "Name", "Phone", "Study", "TypeCourse" },
                 values: new object[,]
                 {
-                    { new Guid("303ec6d6-d58f-452e-82a3-3ea8d46def82"), "test2@gmail.com", new DateTime(2024, 9, 5, 8, 24, 41, 319, DateTimeKind.Local).AddTicks(153), 0, null, ",bvbnbn", "098", "", "[\"teghjst\"]" },
-                    { new Guid("4eccb1ee-0f39-4961-95ae-773cf9bf1334"), "test1@gmail.com", new DateTime(2024, 9, 5, 8, 24, 41, 318, DateTimeKind.Local).AddTicks(8866), 0, null, "sadwa", "098", "", "[\"test\"]" },
-                    { new Guid("ac6fb026-09cf-4a85-80ae-df92c897a7a2"), "test31@gmail.com", new DateTime(2024, 9, 5, 8, 24, 41, 319, DateTimeKind.Local).AddTicks(130), 0, null, "asdgf", "123123", "", "[\"utyy\"]" }
+                    { new Guid("6863a2f9-42d8-4a33-82c7-da3c3c76ee32"), "test2@gmail.com", new DateTime(2024, 9, 5, 15, 50, 6, 389, DateTimeKind.Local).AddTicks(9017), 0, null, ",bvbnbn", "098", "", "[\"teghjst\"]" },
+                    { new Guid("73bd0ebf-fb90-4c56-98c4-66a25de2394b"), "test1@gmail.com", new DateTime(2024, 9, 5, 15, 50, 6, 389, DateTimeKind.Local).AddTicks(7824), 0, null, "sadwa", "098", "", "[\"test\"]" },
+                    { new Guid("bd2a9f06-fbcd-42e7-8aa3-450596e42e5b"), "test31@gmail.com", new DateTime(2024, 9, 5, 15, 50, 6, 389, DateTimeKind.Local).AddTicks(9011), 0, null, "asdgf", "123123", "", "[\"utyy\"]" }
                 });
 
             migrationBuilder.InsertData(
@@ -317,8 +333,8 @@ namespace E_commorec.infrastructuer.Data.Migrations
                 columns: new[] { "Id", "Email", "FirstTimeRegister", "Gender", "Image", "LevelOfStudy", "Name", "Phone", "Position", "TimeToResign" },
                 values: new object[,]
                 {
-                    { new Guid("3b1dd27d-d6da-44d9-9d5e-65f14ea639b8"), "test2@gmail.com", new DateTime(2024, 9, 5, 8, 24, 41, 320, DateTimeKind.Local).AddTicks(2666), 0, null, "str2ing", "s1adwa", "0981", "s3tro", new DateTime(2024, 9, 5, 8, 24, 41, 320, DateTimeKind.Local).AddTicks(2669) },
-                    { new Guid("5669627e-5482-45ba-b216-88d8958737e5"), "test1@gmail.com", new DateTime(2024, 9, 5, 8, 24, 41, 320, DateTimeKind.Local).AddTicks(1287), 0, null, "string", "sadwa", "098", "stro", new DateTime(2024, 9, 5, 8, 24, 41, 320, DateTimeKind.Local).AddTicks(2428) }
+                    { new Guid("ba0cf0e2-b4b0-4801-b7b3-458405d2bccd"), "test2@gmail.com", new DateTime(2024, 9, 5, 15, 50, 6, 391, DateTimeKind.Local).AddTicks(1160), 0, null, "str2ing", "s1adwa", "0981", "s3tro", new DateTime(2024, 9, 5, 15, 50, 6, 391, DateTimeKind.Local).AddTicks(1162) },
+                    { new Guid("ec045839-b1fb-436c-9d9b-37e8df6ecff0"), "test1@gmail.com", new DateTime(2024, 9, 5, 15, 50, 6, 390, DateTimeKind.Local).AddTicks(9838), 0, null, "string", "sadwa", "098", "stro", new DateTime(2024, 9, 5, 15, 50, 6, 391, DateTimeKind.Local).AddTicks(920) }
                 });
 
             migrationBuilder.CreateIndex(
@@ -411,6 +427,9 @@ namespace E_commorec.infrastructuer.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Certificates");
+
+            migrationBuilder.DropTable(
+                name: "Notes");
 
             migrationBuilder.DropTable(
                 name: "StudentSubCourses");

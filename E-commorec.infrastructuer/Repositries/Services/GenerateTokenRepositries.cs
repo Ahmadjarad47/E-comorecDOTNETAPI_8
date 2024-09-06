@@ -1,17 +1,14 @@
 ﻿
 
-using E_commorec.infrastructuer.Data;
 using E_commorec.core.Entity;
 using E_commorec.core.Services;
 using E_commorec.core.Shared;
+using E_commorec.infrastructuer.Data;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace E_commorec.infrastructuer.Repositries.Services

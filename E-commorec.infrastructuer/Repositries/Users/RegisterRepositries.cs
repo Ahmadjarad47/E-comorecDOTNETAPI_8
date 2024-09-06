@@ -1,11 +1,11 @@
 ﻿using E_commorec.core.DTO;
 using E_commorec.core.Entity;
-using E_commorec.core.InterFace;
 using E_commorec.core.InterFace.User;
 using E_commorec.core.Services;
 using E_commorec.core.Shared;
+using E_commorec.infrastructuer.Data;
 using Microsoft.AspNetCore.Identity;
-using System.Security.Cryptography;
+using Microsoft.EntityFrameworkCore;
 namespace E_commorec.infrastructuer.Repositries.Users;
 
 /// <summary>
@@ -16,18 +16,19 @@ public class RegisterRepositries : IUsers
     private readonly UserManager<AppUsers> _user;
     private readonly IGenerateTokenService generateTokenService;
     private readonly IEmailService emailService;
-
+    private readonly AppDbContext context;
     /// <summary>
     /// Constructor to initialize dependencies.
     /// </summary>
     /// <param name="user">UserManager instance for AppUsers.</param>
     /// <param name="generate">Token generation service.</param>
     /// <param name="emailService">Email service.</param>
-    public RegisterRepositries(UserManager<AppUsers> user, IGenerateTokenService generate, IEmailService emailService)
+    public RegisterRepositries(UserManager<AppUsers> user, IGenerateTokenService generate, IEmailService emailService, AppDbContext context)
     {
         _user = user;
         this.generateTokenService = generate;
         this.emailService = emailService;
+        this.context = context;
     }
 
     /// <summary>
@@ -53,6 +54,25 @@ public class RegisterRepositries : IUsers
         {
             return -3;
         }
+        if (user.type == "student")
+        {
+            if (!await context.Students.AsNoTracking().AnyAsync(m => m.Email == user.Email))
+            {
+                return -1;
+            }
+        }
+        else if (user.type == "teacher")
+        {
+            if (!await context.Teachers.AsNoTracking().AnyAsync(m => m.Email == user.Email))
+            {
+                return -1;
+            }
+
+        }
+        else
+        {
+            return -1;
+        }
 
         // Initialize user and register
         AppUsers app = new AppUsers()
@@ -69,7 +89,7 @@ public class RegisterRepositries : IUsers
 
 
         // Send activation email
-        sendEmail(token, user.Email, "Activate your account", "Confirm Email", "ActiveAccount");
+        //    sendEmail(token, user.Email, "Activate your account", "Confirm Email", "ActiveAccount");
 
         // Create user
         IdentityResult res = await _user.CreateAsync(app, user.password);

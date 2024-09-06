@@ -2,12 +2,13 @@
 using E_commorec.core.DTO.Course;
 using E_commorec.core.Entity;
 using E_commorec.core.InterFace;
+using E_comorec.API.Controllers.Admin;
 using E_comorec.API.Helper;
 using Microsoft.AspNetCore.Mvc;
 
-namespace E_comorec.API.Controllers.Users
+namespace Controllers.Admin
 {
-    public class CoursesController : BaseController
+    public class CoursesController : BaseAdminController
     {
         public CoursesController(IUnitOfWork service, IMapper mapper) : base(service, mapper)
         {

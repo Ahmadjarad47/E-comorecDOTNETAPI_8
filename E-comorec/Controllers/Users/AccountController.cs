@@ -1,16 +1,9 @@
-﻿using E_comorec.API.Helper;
+﻿using AutoMapper;
 using E_commorec.core.DTO;
 using E_commorec.core.InterFace;
-using E_commorec.core.InterFace.User;
-using E_commorec.core.Services;
-using E_commorec.core.Shared;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+using E_comorec.API.Helper;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
-using E_comorec.API.Controllers;
-using AutoMapper;
 
 namespace Controllers.Users;
 
@@ -37,21 +30,16 @@ public class AccountController : BaseController
     public async Task<ActionResult> Registeration(UserRegisterDTO userRegisterDTO)
     {
         int res = 10;
-        try
+
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
+            res = await _service.users.RegisterAsync(userRegisterDTO);
+            if (Math.Sign(res) == 1)
             {
-                res = await _service.users.RegisterAsync(userRegisterDTO);
-                if (Math.Sign(res) == 1)
-                {
-                    return Ok(new BaseResponse(200, "user register success"));
-                }
+                return Ok(new BaseResponse(200, "user register success"));
             }
         }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+
         return BadRequest(new BaseResponse(res));
     }
 

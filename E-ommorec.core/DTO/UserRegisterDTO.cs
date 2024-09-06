@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace E_commorec.core.DTO
 {
-    public record UserRegisterDTO([Required] string UserName, [EmailAddress] string Email, [Required] string password);
+    public record UserRegisterDTO([Required] string UserName, [EmailAddress] string Email, [Required] string password, [Required] string type);
 
 }

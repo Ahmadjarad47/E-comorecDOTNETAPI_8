@@ -1,9 +1,4 @@
 ﻿using E_commorec.core.InterFace.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace E_commorec.core.InterFace
 {
@@ -16,5 +11,7 @@ namespace E_commorec.core.InterFace
         public ITeacher Teacher { get; }
         public ICourse Course { get; }
         public ISubCourse SubCourse { get; }
+        public INote note { get; }
+        public ISupport support { get; }
     }
 }

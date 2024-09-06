@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
-using E_commorec.core.DTO.Student;
 using E_commorec.core.DTO.Teacher;
 using E_commorec.core.Entity;
 using E_commorec.core.InterFace;
 using E_commorec.core.Shared;
+using E_comorec.API.Controllers.Admin;
 using E_comorec.API.Helper;
 using Microsoft.AspNetCore.Mvc;
 
-namespace E_comorec.API.Controllers.Users
+namespace Controllers.Admin
 {
-    public class TeachersController : BaseController
+    public class TeachersController : BaseAdminController
     {
         public TeachersController(IUnitOfWork service, IMapper mapper) : base(service, mapper)
         {
@@ -23,6 +23,13 @@ namespace E_comorec.API.Controllers.Users
         public async Task<ActionResult> get(Guid id)
         => Ok(await _service.Teacher.GetByGUIDAsync(id));
 
+
+        [HttpGet("get-note-by-email")]
+        public async Task<ActionResult> get(string email)
+        {
+            var student = await _service.note.GetAllAsync();
+            return Ok(student.Where(m => m.EmailForWho == email));
+        }
 
         [HttpPost("Add-Teacher")]
         public async Task<ActionResult> add([FromBody] TeacherDTO teacher)

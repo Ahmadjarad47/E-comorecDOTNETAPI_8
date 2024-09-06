@@ -3,14 +3,14 @@ using E_commorec.core.DTO.Student;
 using E_commorec.core.Entity;
 using E_commorec.core.InterFace;
 using E_commorec.core.Shared;
+using E_comorec.API.Controllers.Admin;
 using E_comorec.API.Helper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace E_comorec.API.Controllers.Users
+namespace Controllers.Admin
 {
 
-    public class StudentsController : BaseController
+    public class StudentsController : BaseAdminController
     {
         public StudentsController(IUnitOfWork service, IMapper mapper) : base(service, mapper)
         {
@@ -23,6 +23,13 @@ namespace E_comorec.API.Controllers.Users
         [HttpGet("get-by-id")]
         public async Task<ActionResult<ReturnStudentDTO>> get(Guid id)
         => Ok(await _service.Student.GetByIdAsyncWithSubCourse(id));
+
+        [HttpGet("get-note-by-email")]
+        public async Task<ActionResult> get(string email)
+        {
+            var student = await _service.note.GetAllAsync();
+            return Ok(student.Where(m => m.EmailForWho == email));
+        }
         [HttpPost("Add-Student")]
         public async Task<ActionResult> add([FromBody] StudentDTO student)
         {

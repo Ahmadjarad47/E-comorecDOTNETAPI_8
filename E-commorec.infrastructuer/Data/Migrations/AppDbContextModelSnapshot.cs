@@ -147,6 +147,41 @@ namespace E_commorec.infrastructuer.Data.Migrations
                     b.ToTable("Courses");
                 });
 
+            modelBuilder.Entity("E_commorec.core.Entity.Notes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmailForWho")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("ReadOrNot")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("WhenHeRead")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notes");
+                });
+
             modelBuilder.Entity("E_commorec.core.Entity.Student", b =>
                 {
                     b.Property<Guid>("Id")
@@ -189,9 +224,9 @@ namespace E_commorec.infrastructuer.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4eccb1ee-0f39-4961-95ae-773cf9bf1334"),
+                            Id = new Guid("f71f6768-639d-40e0-a053-f8d4ae7c9bde"),
                             Email = "test1@gmail.com",
-                            FirstTimeRegister = new DateTime(2024, 9, 5, 8, 24, 41, 318, DateTimeKind.Local).AddTicks(8866),
+                            FirstTimeRegister = new DateTime(2024, 9, 5, 16, 31, 10, 12, DateTimeKind.Local).AddTicks(4609),
                             Gender = 0,
                             Name = "sadwa",
                             Phone = "098",
@@ -200,9 +235,9 @@ namespace E_commorec.infrastructuer.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ac6fb026-09cf-4a85-80ae-df92c897a7a2"),
+                            Id = new Guid("368fc96d-31e0-4f8e-95b3-a63db1ea8980"),
                             Email = "test31@gmail.com",
-                            FirstTimeRegister = new DateTime(2024, 9, 5, 8, 24, 41, 319, DateTimeKind.Local).AddTicks(130),
+                            FirstTimeRegister = new DateTime(2024, 9, 5, 16, 31, 10, 12, DateTimeKind.Local).AddTicks(7387),
                             Gender = 0,
                             Name = "asdgf",
                             Phone = "123123",
@@ -211,9 +246,9 @@ namespace E_commorec.infrastructuer.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("303ec6d6-d58f-452e-82a3-3ea8d46def82"),
+                            Id = new Guid("30f65820-4a8d-4b4c-a450-c79c1e9a3b65"),
                             Email = "test2@gmail.com",
-                            FirstTimeRegister = new DateTime(2024, 9, 5, 8, 24, 41, 319, DateTimeKind.Local).AddTicks(153),
+                            FirstTimeRegister = new DateTime(2024, 9, 5, 16, 31, 10, 12, DateTimeKind.Local).AddTicks(7410),
                             Gender = 0,
                             Name = ",bvbnbn",
                             Phone = "098",
@@ -341,27 +376,27 @@ namespace E_commorec.infrastructuer.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5669627e-5482-45ba-b216-88d8958737e5"),
+                            Id = new Guid("fd25f0e6-cca6-4554-a95b-a6d378f4a3ff"),
                             Email = "test1@gmail.com",
-                            FirstTimeRegister = new DateTime(2024, 9, 5, 8, 24, 41, 320, DateTimeKind.Local).AddTicks(1287),
+                            FirstTimeRegister = new DateTime(2024, 9, 5, 16, 31, 10, 13, DateTimeKind.Local).AddTicks(8686),
                             Gender = 0,
                             LevelOfStudy = "string",
                             Name = "sadwa",
                             Phone = "098",
                             Position = "stro",
-                            TimeToResign = new DateTime(2024, 9, 5, 8, 24, 41, 320, DateTimeKind.Local).AddTicks(2428)
+                            TimeToResign = new DateTime(2024, 9, 5, 16, 31, 10, 13, DateTimeKind.Local).AddTicks(9798)
                         },
                         new
                         {
-                            Id = new Guid("3b1dd27d-d6da-44d9-9d5e-65f14ea639b8"),
+                            Id = new Guid("cd77bce1-03d9-4731-8e51-43768ba60f01"),
                             Email = "test2@gmail.com",
-                            FirstTimeRegister = new DateTime(2024, 9, 5, 8, 24, 41, 320, DateTimeKind.Local).AddTicks(2666),
+                            FirstTimeRegister = new DateTime(2024, 9, 5, 16, 31, 10, 14, DateTimeKind.Local).AddTicks(24),
                             Gender = 0,
                             LevelOfStudy = "str2ing",
                             Name = "s1adwa",
                             Phone = "0981",
                             Position = "s3tro",
-                            TimeToResign = new DateTime(2024, 9, 5, 8, 24, 41, 320, DateTimeKind.Local).AddTicks(2669)
+                            TimeToResign = new DateTime(2024, 9, 5, 16, 31, 10, 14, DateTimeKind.Local).AddTicks(27)
                         });
                 });
 

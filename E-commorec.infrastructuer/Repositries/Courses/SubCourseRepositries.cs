@@ -23,6 +23,76 @@ namespace E_commorec.infrastructuer.Repositries.Courses
             this.mapper = mapper;
             this.fileProvider = fileProvider;
         }
+        public async Task<ReturnSubCourse> GetCourseForStudent(string email, int id)
+        {
+            // Perform the query to get student data along with their associated subcourses in one go
+            var studentSubCourses = await context.Students
+                .AsNoTracking()
+                .Where(s => s.Email == email)
+                .Select(s => new
+                {
+                    SubCourses = s.StudentSubCourses.Where(m => m.SubCourseId == id)
+                    .Select(ssc => new ReturnSubCourse
+                    {
+
+                        Id = ssc.SubCourseId,
+                        CourseName = ssc.SubCourse.Course.Name,
+                        Name = ssc.SubCourse.Name,
+                        Day = ssc.SubCourse.Day,
+                        Hourscompleted = ssc.SubCourse.Hourscompleted,
+                        Image = ssc.SubCourse.Image,
+                        Price = ssc.SubCourse.Price,
+                        TeacherName = ssc.SubCourse.Teacher.Name,
+                        TimeHouerFromTo = ssc.SubCourse.TimeHouerFromTo,
+                        TotalHour = ssc.SubCourse.TotalHour,
+                        TimeOfLectuer = ssc.SubCourse.TimeOfLectuer,
+                        TeacherId = ssc.SubCourse.TeacherId
+                    }).FirstOrDefault()
+                })
+                .FirstOrDefaultAsync();
+
+
+
+            // Return the subcourses list
+            return studentSubCourses.SubCourses;
+        }
+        public async Task<IReadOnlyList<ReturnSubCourse>> GetCoursesForStudent(string email)
+        {
+            // Perform the query to get student data along with their associated subcourses in one go
+            var studentSubCourses = await context.Students
+                .AsNoTracking()
+                .Where(s => s.Email == email)
+                .Select(s => new
+                {
+                    SubCourses = s.StudentSubCourses.Select(ssc => new ReturnSubCourse
+                    {
+                        Id = ssc.SubCourseId,
+                        CourseName = ssc.SubCourse.Course.Name,
+                        Name = ssc.SubCourse.Name,
+                        Day = ssc.SubCourse.Day,
+                        Hourscompleted = ssc.SubCourse.Hourscompleted,
+                        Image = ssc.SubCourse.Image,
+                        Price = ssc.SubCourse.Price,
+                        TeacherName = ssc.SubCourse.Teacher.Name,
+                        TimeHouerFromTo = ssc.SubCourse.TimeHouerFromTo,
+                        TotalHour = ssc.SubCourse.TotalHour,
+                        TimeOfLectuer = ssc.SubCourse.TimeOfLectuer,
+                        TeacherId = ssc.SubCourse.TeacherId
+                    }).ToList()
+                })
+                .FirstOrDefaultAsync();
+
+            // Handle case where no student is found
+            if (studentSubCourses == null || studentSubCourses.SubCourses == null || !studentSubCourses.SubCourses.Any())
+            {
+                return new List<ReturnSubCourse>();  // Return empty list or handle it differently based on your needs
+            }
+
+            // Return the subcourses list
+            return studentSubCourses.SubCourses;
+        }
+
+
 
 
 
@@ -288,7 +358,6 @@ namespace E_commorec.infrastructuer.Repositries.Courses
 
             return true;
         }
-
 
 
     }
